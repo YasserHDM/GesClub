@@ -1,13 +1,12 @@
 package com.example.demo.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 public class Tresorerie {
     @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private String idTres;
 
     private Double budget;

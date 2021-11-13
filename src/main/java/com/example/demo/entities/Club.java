@@ -1,13 +1,11 @@
 package com.example.demo.entities;
 
-import org.apache.tomcat.jni.Address;
-
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Club {
-
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private String idClub;
@@ -22,6 +20,9 @@ public class Club {
     @OneToOne
     @JoinColumn(name = "tresorerie_id")
     private Tresorerie tresorerie;
+
+    @OneToMany(mappedBy = "club")
+    private List<Activite> activites;
 
     public String getIdClub() {
         return idClub;
@@ -54,4 +55,6 @@ public class Club {
     public Tresorerie getTresorerie() {
         return tresorerie;
     }
+
+    public List<Activite> getActivites() { return activites; }
 }

@@ -1,11 +1,6 @@
 package com.example.demo.entities;
 
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -20,9 +15,11 @@ public class Activite {
     private boolean status;
     private String lieu;
 
-    public String getIdAct() {
-        return idAct;
-    }
+    @ManyToOne
+    @JoinColumn(name="club_id")
+    private Club club;
+
+    public String getIdAct() { return idAct; }
 
     public String getNomAct() {
         return nomAct;
@@ -42,5 +39,9 @@ public class Activite {
 
     public String getLieu() {
         return lieu;
+    }
+
+    public Club getClub() {
+        return club;
     }
 }
