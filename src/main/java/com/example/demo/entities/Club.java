@@ -24,6 +24,10 @@ public class Club {
     @OneToMany(mappedBy = "club")
     private List<Activite> activites;
 
+    @ManyToOne
+    @JoinColumn(name="affiliation_id")
+    private Affiliation affiliation;
+
     public String getIdClub() {
         return idClub;
     }
