@@ -28,6 +28,10 @@ public class Club {
     @JoinColumn(name="affiliation_id")
     private Affiliation affiliation;
 
+    @OneToOne
+    @JoinColumn(name = "reunion_id")
+    private Reunion reunion;
+
     public String getIdClub() {
         return idClub;
     }

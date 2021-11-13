@@ -1,9 +1,6 @@
 package com.example.demo.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -15,6 +12,9 @@ public class Reunion {
     private Date dateReu;
     private int nrbMembr;
     private String pv;
+
+    @OneToOne(mappedBy = "reunion")
+    private Club club;
 
     public String getIdReu() {
         return idReu;
