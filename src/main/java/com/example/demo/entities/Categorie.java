@@ -1,9 +1,7 @@
 package com.example.demo.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Categorie {
@@ -13,6 +11,9 @@ public class Categorie {
 
     private String nomCate;
     private String descCate;
+
+    @OneToMany(mappedBy = "categorie")
+    private List<Club> clubs;
 
     public String getIdCate() {
         return idCate;

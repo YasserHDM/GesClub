@@ -13,7 +13,8 @@ public class Reunion {
     private int nrbMembr;
     private String pv;
 
-    @OneToOne(mappedBy = "reunion")
+    @ManyToOne
+    @JoinColumn(name="club_id")
     private Club club;
 
     public String getIdReu() {

@@ -1,9 +1,6 @@
 package com.example.demo.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
@@ -16,6 +13,10 @@ public class Facture {
     private Date dateFact;
     private double montant;
     private boolean status;
+
+    @ManyToOne
+    @JoinColumn(name="activite_id")
+    private Activite activite;
 
     public String getIdFact() {
         return idFact;

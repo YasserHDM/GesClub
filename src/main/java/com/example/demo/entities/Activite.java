@@ -2,6 +2,7 @@ package com.example.demo.entities;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Activite {
@@ -18,6 +19,9 @@ public class Activite {
     @ManyToOne
     @JoinColumn(name="club_id")
     private Club club;
+
+    @OneToMany(mappedBy = "activite")
+    private List<Facture> factures;
 
     public String getIdAct() { return idAct; }
 

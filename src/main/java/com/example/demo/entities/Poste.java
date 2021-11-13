@@ -1,10 +1,8 @@
 package com.example.demo.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Poste {
@@ -18,6 +16,13 @@ public class Poste {
     private Date datePub;
     private int countUp;
     private int countDn;
+
+    @ManyToOne
+    @JoinColumn(name="club_id")
+    private Club club;
+
+    @OneToMany(mappedBy = "poste")
+    private List<Multimedia> multimedias;
 
     public String getIdPst() {
         return idPst;

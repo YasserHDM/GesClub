@@ -1,9 +1,7 @@
 package com.example.demo.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Referent {
@@ -14,6 +12,9 @@ public class Referent {
     private String nomRef;
     private String prenRef;
     private boolean status;
+
+    @OneToMany(mappedBy = "referent")
+    private List<Club> clubs;
 
     public String getIdRef() {
         return idRef;

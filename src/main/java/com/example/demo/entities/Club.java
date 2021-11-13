@@ -28,9 +28,19 @@ public class Club {
     @JoinColumn(name="affiliation_id")
     private Affiliation affiliation;
 
-    @OneToOne
-    @JoinColumn(name = "reunion_id")
-    private Reunion reunion;
+    @OneToMany(mappedBy = "club")
+    private List<Reunion> reunions;
+
+    @OneToMany(mappedBy = "club")
+    private List<Poste> postes;
+
+    @ManyToOne
+    @JoinColumn(name="categorie_id")
+    private Categorie categorie;
+
+    @ManyToOne
+    @JoinColumn(name="referent_id")
+    private Referent referent;
 
     public String getIdClub() {
         return idClub;

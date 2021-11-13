@@ -13,7 +13,6 @@ public class Sponsor {
 
     private String nomSpr;
     private String typeSpr;
-    private double budget;
     private String logoSpr;
 
     public String getIdSpr() {
@@ -26,10 +25,6 @@ public class Sponsor {
 
     public String getTypeSpr() {
         return typeSpr;
-    }
-
-    public double getBudget() {
-        return budget;
     }
 
     public String getLogoSpr() {
