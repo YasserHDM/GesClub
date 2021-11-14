@@ -1,9 +1,7 @@
 package com.example.demo.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Groupe {
@@ -15,6 +13,9 @@ public class Groupe {
     private int valGrp;
     private String descGrp;
     private boolean status;
+
+    @OneToMany(mappedBy = "groupe")
+    private List<Membre> membres;
 
     public String getIdGrp() {
         return idGrp;

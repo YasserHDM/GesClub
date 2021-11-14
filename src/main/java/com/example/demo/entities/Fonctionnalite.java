@@ -1,9 +1,7 @@
 package com.example.demo.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Fonctionnalite {
@@ -13,6 +11,14 @@ public class Fonctionnalite {
 
     private String nomFonct;
     private String descFonct;
+
+    @ManyToMany
+    @JoinTable(
+            name = "MembreClub",
+            joinColumns = @JoinColumn(name = "fonctionnalite_id"),
+            inverseJoinColumns = @JoinColumn(name = "membre_id")
+    )
+    private List<Membre> membres;
 
     public String getIdFonct() {
         return idFonct;

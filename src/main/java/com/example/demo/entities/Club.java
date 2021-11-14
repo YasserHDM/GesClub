@@ -42,6 +42,9 @@ public class Club {
     @JoinColumn(name="referent_id")
     private Referent referent;
 
+    @ManyToMany(mappedBy = "clubs")
+    private List<Membre> membres;
+
     public String getIdClub() {
         return idClub;
     }

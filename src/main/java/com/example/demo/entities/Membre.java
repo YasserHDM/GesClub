@@ -1,10 +1,8 @@
 package com.example.demo.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Membre {
@@ -15,6 +13,21 @@ public class Membre {
     private boolean status;
     private Date dateCon;
     private String pdpMembre;
+
+    @ManyToMany
+    @JoinTable(
+            name = "MembreClub",
+            joinColumns = @JoinColumn(name = "membre_id"),
+            inverseJoinColumns = @JoinColumn(name = "club_id")
+    )
+    private List<Club> clubs;
+
+    @ManyToOne
+    @JoinColumn(name="groupe_id")
+    private Groupe groupe;
+
+    @ManyToMany(mappedBy = "membres")
+    private List<Fonctionnalite> fonctionnalites;
 
     public String getIdMembre() {
         return idMembre;
