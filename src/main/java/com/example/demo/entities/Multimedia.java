@@ -21,4 +21,8 @@ public class Multimedia {
     public String getUrl() {
         return url;
     }
+
+    public Poste getPoste() {
+        return poste;
+    }
 }

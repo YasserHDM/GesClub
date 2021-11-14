@@ -32,4 +32,8 @@ public class Reunion {
     public String getPv() {
         return pv;
     }
+
+    public Club getClub() {
+        return club;
+    }
 }

@@ -37,4 +37,8 @@ public class Facture {
     public boolean isStatus() {
         return status;
     }
+
+    public Activite getActivite() {
+        return activite;
+    }
 }

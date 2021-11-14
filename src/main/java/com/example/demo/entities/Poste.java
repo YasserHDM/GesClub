@@ -51,4 +51,12 @@ public class Poste {
     public int getCountDn() {
         return countDn;
     }
+
+    public Club getClub() {
+        return club;
+    }
+
+    public List<Multimedia> getMultimedias() {
+        return multimedias;
+    }
 }

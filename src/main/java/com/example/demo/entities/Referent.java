@@ -31,4 +31,8 @@ public class Referent {
     public boolean isStatus() {
         return status;
     }
+
+    public List<Club> getClubs() {
+        return clubs;
+    }
 }

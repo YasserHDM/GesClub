@@ -23,7 +23,14 @@ public class Activite {
     @OneToMany(mappedBy = "activite")
     private List<Facture> factures;
 
+    @OneToMany(mappedBy = "activite")
+    private List<SponsorBudget> sponsorBudgets;
+
     public String getIdAct() { return idAct; }
+
+    public List<SponsorBudget> getSponsorBudgets() {
+        return sponsorBudgets;
+    }
 
     public String getNomAct() {
         return nomAct;
@@ -47,5 +54,9 @@ public class Activite {
 
     public Club getClub() {
         return club;
+    }
+
+    public List<Facture> getFactures() {
+        return factures;
     }
 }

@@ -26,4 +26,8 @@ public class Affiliation {
     public String getDescAff() {
         return DescAff;
     }
+
+    public List<Club> getClubs() {
+        return clubs;
+    }
 }

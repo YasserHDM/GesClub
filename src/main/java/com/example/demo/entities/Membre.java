@@ -44,4 +44,16 @@ public class Membre {
     public String getPdpMembre() {
         return pdpMembre;
     }
+
+    public List<Club> getClubs() {
+        return clubs;
+    }
+
+    public Groupe getGroupe() {
+        return groupe;
+    }
+
+    public List<Fonctionnalite> getFonctionnalites() {
+        return fonctionnalites;
+    }
 }

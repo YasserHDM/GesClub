@@ -78,4 +78,28 @@ public class Club {
     }
 
     public List<Activite> getActivites() { return activites; }
+
+    public Affiliation getAffiliation() {
+        return affiliation;
+    }
+
+    public List<Reunion> getReunions() {
+        return reunions;
+    }
+
+    public List<Poste> getPostes() {
+        return postes;
+    }
+
+    public Categorie getCategorie() {
+        return categorie;
+    }
+
+    public Referent getReferent() {
+        return referent;
+    }
+
+    public List<Membre> getMembres() {
+        return membres;
+    }
 }

@@ -26,4 +26,8 @@ public class Categorie {
     public String getDescCate() {
         return descCate;
     }
+
+    public List<Club> getClubs() {
+        return clubs;
+    }
 }
