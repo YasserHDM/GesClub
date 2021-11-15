@@ -1,13 +1,17 @@
 package com.example.demo.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Activite {
+@Table
+public class Activite implements Serializable {
+
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
+
     private String idAct;
 
     private String nomAct;
