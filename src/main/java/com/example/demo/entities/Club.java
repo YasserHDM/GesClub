@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@Table(name = "club")
 public class Club {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -44,6 +45,16 @@ public class Club {
 
     @ManyToMany(mappedBy = "clubs")
     private List<Membre> membres;
+
+    public Club(String idClub, String nomClub, String descClub, Date dateCre, boolean status, String logo, String coverImg) {
+        this.idClub = idClub;
+        this.nomClub = nomClub;
+        this.descClub = descClub;
+        this.dateCre = dateCre;
+        this.status = status;
+        this.logo = logo;
+        this.coverImg = coverImg;
+    }
 
     public String getIdClub() {
         return idClub;

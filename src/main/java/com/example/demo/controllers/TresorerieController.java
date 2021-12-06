@@ -15,7 +15,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(path = "api/activite")
+@RequestMapping(path = "api/tresorerie")
 public class TresorerieController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TresorerieController.class);

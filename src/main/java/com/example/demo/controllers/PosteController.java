@@ -15,7 +15,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(path = "api/activite")
+@RequestMapping(path = "api/poste")
 public class PosteController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PosteController.class);

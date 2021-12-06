@@ -15,7 +15,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(path = "api/activite")
+@RequestMapping(path = "api/club")
 public class ClubController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ClubController.class);

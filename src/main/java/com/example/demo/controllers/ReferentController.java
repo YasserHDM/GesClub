@@ -15,7 +15,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(path = "api/activite")
+@RequestMapping(path = "api/referent")
 public class ReferentController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ReferentController.class);
