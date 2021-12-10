@@ -7,15 +7,15 @@ import com.example.demo.services.ClubService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 
 @RestController
-@RequestMapping(path = "api/club")
+@RequestMapping(path = "/api")
 public class ClubController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ClubController.class);
@@ -23,9 +23,31 @@ public class ClubController {
     @Autowired
     ClubService clubService;
 
+
+    @RequestMapping(path = "/club")
     @GetMapping
     public List<Club> showActivities(){
         return clubService.showActivite();
     }
 
+    @RequestMapping(path = "/createClub")
+    @PostMapping
+    public Club createClub() {return clubService.createClub(null);}
+
+    @RequestMapping(path = "/findClubId/{id}")
+    @GetMapping
+    public Club findClubById(@PathVariable("id") String id) {return clubService.getClubById(id);}
+
+    @RequestMapping(path = "/findClubName/{name}")
+    @GetMapping
+    public Club findClubByName(@PathVariable("name") String name) {return clubService.getClubBynomClub(name);}
+
+    @PostMapping(
+            path = "{idClub}/image/download",
+    consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
+    produces = MediaType.APPLICATION_JSON_VALUE)
+    public void uploadImage(@PathVariable("idClub") String idClub,
+                            @RequestParam("file") MultipartFile file) {
+        clubService.uploadImage(idClub, file);
+    }
 }

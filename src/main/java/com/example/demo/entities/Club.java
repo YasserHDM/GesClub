@@ -1,5 +1,8 @@
 package com.example.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -8,7 +11,8 @@ import java.util.List;
 @Table(name = "club")
 public class Club {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.AUTO, generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
     private String idClub;
 
     private String nomClub;
@@ -22,6 +26,7 @@ public class Club {
     @JoinColumn(name = "tresorerie_id")
     private Tresorerie tresorerie;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "club")
     private List<Activite> activites;
 
@@ -29,9 +34,11 @@ public class Club {
     @JoinColumn(name="affiliation_id")
     private Affiliation affiliation;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "club")
     private List<Reunion> reunions;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "club")
     private List<Poste> postes;
 
@@ -43,10 +50,16 @@ public class Club {
     @JoinColumn(name="referent_id")
     private Referent referent;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "clubs")
     private List<Membre> membres;
 
-    public Club(String idClub, String nomClub, String descClub, Date dateCre, boolean status, String logo, String coverImg) {
+    public Club() {
+
+    }
+
+
+    public Club(String idClub, String nomClub, String descClub, Date dateCre, boolean status, String logo, String coverImg, List<Activite> activites) {
         this.idClub = idClub;
         this.nomClub = nomClub;
         this.descClub = descClub;
@@ -54,6 +67,7 @@ public class Club {
         this.status = status;
         this.logo = logo;
         this.coverImg = coverImg;
+        this.activites = activites;
     }
 
     public String getIdClub() {

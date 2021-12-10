@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface ClubRepository extends JpaRepository<Club, String> {
 
 
+    Club getClubBynomClub(String id);
 }

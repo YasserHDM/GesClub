@@ -1,7 +1,7 @@
 CREATE TABLE club (
   id_club varchar(255) not null,
   cover_img varchar(255) not null,
-  date_cre timestamp not null,
+  date_cre timestamp,
   desc_club varchar(255) not null,
   logo varchar(255) not null,
   nom_club varchar(255) not null,
