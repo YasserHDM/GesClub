@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
 import {useDropzone} from 'react-dropzone'
-
+import ListClubComponent from './Components/ListClubComponent'
 
 const ClubProfiles = () => {
   const [ClubProfiles, setClubProfiles] = useState([]);
@@ -83,8 +83,18 @@ function Dropzone({ idClub }) {
 function App() {
   return (
     <div className="App">
-     <ClubProfiles />
+      <div>
+        <ClubProfiles />
+      </div>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <div>
+        <ListClubComponent/>
+      </div>
     </div>
+    
   );
 }
 

@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @Service
 public class FileStore {
-
+/*
     private final AmazonS3 s3;
 
     @Autowired
@@ -47,4 +47,6 @@ public class FileStore {
             throw new IllegalStateException("Failed to store file to s3", e);
         }
     }
+
+ */
 }

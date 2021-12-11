@@ -90,7 +90,7 @@ public class ClubService {
         if (name == null)  return null;
         else return clubRepository.getClubBynomClub(name);
     }
-
+/*
     public byte[] downloadImage(String idClub) {
         Club club = getClubById(idClub);
         String path = String.format("%s/%s", BucketName.CLUB_IMAGE.getBucketName(), club.getIdClub());
@@ -99,4 +99,6 @@ public class ClubService {
                 .orElse(new byte[0]);
 
     }
+
+ */
 }
