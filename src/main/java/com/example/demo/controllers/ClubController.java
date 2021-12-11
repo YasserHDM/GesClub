@@ -11,11 +11,13 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 
 @RestController
 @RequestMapping(path = "/api")
+@CrossOrigin("*")  // just for testing in localhost || need to change for API deployment
 public class ClubController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ClubController.class);
@@ -26,8 +28,8 @@ public class ClubController {
 
     @RequestMapping(path = "/club")
     @GetMapping
-    public List<Club> showActivities(){
-        return clubService.showActivite();
+    public List<Club> getClubs(){
+        return clubService.getClubs();
     }
 
     @RequestMapping(path = "/createClub")
@@ -43,11 +45,11 @@ public class ClubController {
     public Club findClubByName(@PathVariable("name") String name) {return clubService.getClubBynomClub(name);}
 
     @PostMapping(
-            path = "{idClub}/image/download",
+            path = "{idClub}/image/upload",
     consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
     produces = MediaType.APPLICATION_JSON_VALUE)
     public void uploadImage(@PathVariable("idClub") String idClub,
-                            @RequestParam("file") MultipartFile file) {
+                            @RequestParam("file") MultipartFile file) throws IOException {
         clubService.uploadImage(idClub, file);
     }
 }
