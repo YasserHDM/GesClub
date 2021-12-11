@@ -1,34 +1,33 @@
 package com.example.demo.services;
 
 
-import com.example.demo.entities.Affiliation;
+import com.example.demo.filestore.FileStore;
+import com.example.demo.bucket.BucketName;
 import com.example.demo.entities.Club;
-import com.example.demo.repositories.AffiliationRepository;
 import com.example.demo.repositories.ClubRepository;
-import org.apache.http.entity.ContentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.apache.http.HttpEntity;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static org.apache.http.entity.ContentType.*;
 
 @Service
 public class ClubService {
+
+    private final FileStore fileStore;
+
+    @Autowired
+    ClubRepository clubRepository;
+
+    public ClubService(FileStore fileStore) {
+        this.fileStore = fileStore;
+    }
+
 
     public void uploadImage(String idClub, MultipartFile file) throws IOException {
         if (file.isEmpty()){
@@ -39,23 +38,30 @@ public class ClubService {
             throw new IllegalStateException("file must be an image");
         }
 
-        //Check the cub exist
+        //create metadata for the file
+        Map<String, String> metadata = new HashMap<>();
+        metadata.put("Content-Type", file.getContentType());
+        metadata.put("Content-Length", String.valueOf(file.getSize()));
+        System.out.println(getClubs().get(0).getIdClub());
+        System.out.println(idClub);
+        //Check the club exist
         Club club = getClubs().stream().filter(clubfilter -> clubfilter.getIdClub().equals(idClub))
                 .findFirst()
                 .orElseThrow(() -> new IllegalStateException("Club " + idClub + "doesn't exist"));
 
-
-        //save the file in the ressource folder
+        /*save the file in the ressource folder
+        String path = String.format("%s/%s", BucketName.CLUB_IMAGE.getBucketName(), club.getIdClub());
+        String fileName = String.format("%s/%s", file.getName(), UUID.randomUUID());
+        try {
+            fileStore.save(path, fileName, Optional.of(metadata), file.getInputStream());
+            club.setLogo(fileName);
+        } catch(IOException e) {
+            throw new IllegalStateException(e);
+        }
+         */
 
     }
 
-
-    @ResponseStatus(value= HttpStatus.NOT_FOUND, reason="No such Order")  // 404
-    static public class OrderNotFoundException extends RuntimeException {
-        // ...
-    }
-    @Autowired
-    ClubRepository clubRepository;
 
     public List<Club> getClubs() {
         return clubRepository.findAll();
@@ -85,4 +91,12 @@ public class ClubService {
         else return clubRepository.getClubBynomClub(name);
     }
 
+    public byte[] downloadImage(String idClub) {
+        Club club = getClubById(idClub);
+        String path = String.format("%s/%s", BucketName.CLUB_IMAGE.getBucketName(), club.getIdClub());
+        return club.getLogo()
+                .map(key -> fileStore.download(path, key))
+                .orElse(new byte[0]);
+
+    }
 }

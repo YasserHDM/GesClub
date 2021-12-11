@@ -6,6 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Entity
 @Table(name = "club")
@@ -70,6 +71,66 @@ public class Club {
         this.activites = activites;
     }
 
+    public void setIdClub(String idClub) {
+        this.idClub = idClub;
+    }
+
+    public void setNomClub(String nomClub) {
+        this.nomClub = nomClub;
+    }
+
+    public void setDescClub(String descClub) {
+        this.descClub = descClub;
+    }
+
+    public void setDateCre(Date dateCre) {
+        this.dateCre = dateCre;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+
+    public void setCoverImg(String coverImg) {
+        this.coverImg = coverImg;
+    }
+
+    public void setTresorerie(Tresorerie tresorerie) {
+        this.tresorerie = tresorerie;
+    }
+
+    public void setActivites(List<Activite> activites) {
+        this.activites = activites;
+    }
+
+    public void setAffiliation(Affiliation affiliation) {
+        this.affiliation = affiliation;
+    }
+
+    public void setReunions(List<Reunion> reunions) {
+        this.reunions = reunions;
+    }
+
+    public void setPostes(List<Poste> postes) {
+        this.postes = postes;
+    }
+
+    public void setCategorie(Categorie categorie) {
+        this.categorie = categorie;
+    }
+
+    public void setReferent(Referent referent) {
+        this.referent = referent;
+    }
+
+    public void setMembres(List<Membre> membres) {
+        this.membres = membres;
+    }
+
     public String getIdClub() {
         return idClub;
     }
@@ -90,8 +151,8 @@ public class Club {
         return status;
     }
 
-    public String getLogo() {
-        return logo;
+    public Optional<String> getLogo() {
+        return Optional.ofNullable(logo);
     }
 
     public String getCoverImg() {

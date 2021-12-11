@@ -52,4 +52,9 @@ public class ClubController {
                             @RequestParam("file") MultipartFile file) throws IOException {
         clubService.uploadImage(idClub, file);
     }
+
+    @GetMapping(path = "{idClub}/image/download")
+    public byte[] downloadImage(@PathVariable("idClub") String idClub) {
+        return clubService.downloadImage(idClub);
+    }
 }

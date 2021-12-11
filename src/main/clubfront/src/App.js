@@ -23,12 +23,15 @@ const ClubProfiles = () => {
 
     return (
       <div key={index}>
+        {clubProfiles.idClub ? (
+          <img src={'http://localhost:8080/api/'+ clubProfiles.idClub +'/image/upload'} ></img>
+        ) : null }
         <h1>{clubProfiles.nomClub}</h1>
         <ul>
           <li>id : {clubProfiles.idClub}</li>
           <li>descrption : {clubProfiles.descClub}</li>
           <li>date de creation : {clubProfiles.dateCre}</li>
-          <li><Dropzone {...clubProfiles} /></li>
+          <li><Dropzone idClub = {clubProfiles.idClub} /></li>
         </ul>
         <br></br>
         <br></br>
@@ -38,7 +41,7 @@ const ClubProfiles = () => {
   })
 };
 
-function Dropzone({ clubProfileId }) {
+function Dropzone({ idClub }) {
   const onDrop = useCallback(acceptedFiles => {
     const file = acceptedFiles[0];
     console.log(file);
@@ -47,7 +50,7 @@ function Dropzone({ clubProfileId }) {
     formData.append("file", file);
     
     axios.post(
-      'http://localhost:8080/api/${clubProfileId}/image/upload', 
+      'http://localhost:8080/api/'+ idClub +'/image/upload', 
       formData,
       {
         headers: {
