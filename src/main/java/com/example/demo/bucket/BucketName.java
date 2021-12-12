@@ -2,7 +2,7 @@ package com.example.demo.bucket;
 
 public enum BucketName {
 
-    CLUB_IMAGE("");
+    CLUB_IMAGE("uir-clubs-ressources");
     private final String bucketName;
 
     BucketName(String bucketName) {

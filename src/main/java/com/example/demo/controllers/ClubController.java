@@ -42,6 +42,8 @@ public class ClubController {
     @GetMapping
     public Club findClubByName(@PathVariable("name") String name) {return clubService.getClubBynomClub(name);}
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //DO NOT ENABLE              DO NOT ENABLE            DO NOT ENABLE                    DO NOT ENABLE          DO NOT ENABLE
     @PostMapping(
             path = "{idClub}/image/upload",
     consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
@@ -50,11 +52,11 @@ public class ClubController {
                             @RequestParam("file") MultipartFile file) throws IOException {
         clubService.uploadImage(idClub, file);
     }
-/*
+
     @GetMapping(path = "{idClub}/image/download")
     public byte[] downloadImage(@PathVariable("idClub") String idClub) {
         return clubService.downloadImage(idClub);
     }
-    
- */
+    //DO NOT ENABLE              DO NOT ENABLE            DO NOT ENABLE                    DO NOT ENABLE          DO NOT ENABLE
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }

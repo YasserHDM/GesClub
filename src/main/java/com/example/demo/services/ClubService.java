@@ -49,7 +49,7 @@ public class ClubService {
                 .findFirst()
                 .orElseThrow(() -> new IllegalStateException("Club " + idClub + "doesn't exist"));
 
-        /*save the file in the ressource folder
+        //save the file in the ressource folder
         String path = String.format("%s/%s", BucketName.CLUB_IMAGE.getBucketName(), club.getIdClub());
         String fileName = String.format("%s/%s", file.getName(), UUID.randomUUID());
         try {
@@ -58,7 +58,15 @@ public class ClubService {
         } catch(IOException e) {
             throw new IllegalStateException(e);
         }
-         */
+    }
+
+
+    public byte[] downloadImage(String idClub) {
+        Club club = getClubById(idClub);
+        String path = String.format("%s/%s", BucketName.CLUB_IMAGE.getBucketName(), club.getIdClub());
+        return club.getLogo()
+                .map(key -> fileStore.download(path, key))
+                .orElse(new byte[0]);
 
     }
 
@@ -90,15 +98,7 @@ public class ClubService {
         if (name == null)  return null;
         else return clubRepository.getClubBynomClub(name);
     }
-/*
-    public byte[] downloadImage(String idClub) {
-        Club club = getClubById(idClub);
-        String path = String.format("%s/%s", BucketName.CLUB_IMAGE.getBucketName(), club.getIdClub());
-        return club.getLogo()
-                .map(key -> fileStore.download(path, key))
-                .orElse(new byte[0]);
 
-    }
 
- */
+
 }

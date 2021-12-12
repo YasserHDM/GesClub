@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @Service
 public class FileStore {
-/*
+
     private final AmazonS3 s3;
 
     @Autowired
@@ -43,10 +43,11 @@ public class FileStore {
         });
         try {
             s3.putObject(path, fileName, inputStream, metadata);
+
         } catch (AmazonServiceException e){
             throw new IllegalStateException("Failed to store file to s3", e);
         }
     }
 
- */
+
 }
