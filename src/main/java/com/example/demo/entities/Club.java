@@ -2,6 +2,7 @@ package com.example.demo.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.boot.context.properties.bind.Name;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -15,6 +16,7 @@ public class Club {
     @GeneratedValue(strategy= GenerationType.AUTO, generator="system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid")
     private String idClub;
+
 
     private String nomClub;
     private String descClub;

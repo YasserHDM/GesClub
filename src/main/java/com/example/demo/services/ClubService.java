@@ -1,12 +1,14 @@
 package com.example.demo.services;
 
 
+import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.filestore.FileStore;
 import com.example.demo.bucket.BucketName;
 import com.example.demo.entities.Club;
 import com.example.demo.repositories.ClubRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,8 +44,7 @@ public class ClubService {
         Map<String, String> metadata = new HashMap<>();
         metadata.put("Content-Type", file.getContentType());
         metadata.put("Content-Length", String.valueOf(file.getSize()));
-        System.out.println(getClubs().get(0).getIdClub());
-        System.out.println(idClub);
+
         //Check the club exist
         Club club = getClubs().stream().filter(clubfilter -> clubfilter.getIdClub().equals(idClub))
                 .findFirst()
@@ -53,8 +54,10 @@ public class ClubService {
         String path = String.format("%s/%s", BucketName.CLUB_IMAGE.getBucketName(), club.getIdClub());
         String fileName = String.format("%s/%s", file.getName(), UUID.randomUUID());
         try {
+            System.out.println("Nom du ficher est : " + fileName);
             fileStore.save(path, fileName, Optional.of(metadata), file.getInputStream());
             club.setLogo(fileName);
+
         } catch(IOException e) {
             throw new IllegalStateException(e);
         }
@@ -62,7 +65,7 @@ public class ClubService {
 
 
     public byte[] downloadImage(String idClub) {
-        Club club = getClubById(idClub);
+        Club club = getClubById(idClub).getBody();
         String path = String.format("%s/%s", BucketName.CLUB_IMAGE.getBucketName(), club.getIdClub());
         return club.getLogo()
                 .map(key -> fileStore.download(path, key))
@@ -75,28 +78,26 @@ public class ClubService {
         return clubRepository.findAll();
     }
 
-    @RequestMapping(value = "", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public Club createClub(@RequestBody Club club){
-        String msg;
-        Club test = new Club("1", "UIR17", "INFORMER",
-                null, true, "UIR", "UIRimage", null);
-        Club c = clubRepository.save(test);
-        if (c == null) {
-            msg = "Error de Creation de club";
-        }
-        return c;
+        return clubRepository.save(club);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Club getClubById(@PathVariable("id") String id){
-        if (id == null)  return null;
-        else return clubRepository.getById(id);
+    public ResponseEntity<Club> getClubById(@PathVariable("id") String idClub){
+
+        Club club = clubRepository.findById(idClub)
+                .orElseThrow( () -> new ResourceNotFoundException("Club with id " + idClub + " not found"));
+
+        return ResponseEntity.ok().body(club);
     }
 
     @RequestMapping(value = "/{name}", method = RequestMethod.GET)
-    public Club getClubBynomClub(@PathVariable("name") String name){
-        if (name == null)  return null;
-        else return clubRepository.getClubBynomClub(name);
+    public ResponseEntity<Club> getClubBynomClub(@RequestParam String nomClub) throws ResourceNotFoundException {
+        Club club = clubRepository.findByNomClub(nomClub)
+                .orElseThrow( () -> new ResourceNotFoundException("Club with id " + nomClub + " not found"));
+
+        return ResponseEntity.ok().body(club);
     }
 
 

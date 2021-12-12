@@ -23,9 +23,9 @@ const ClubProfiles = () => {
 
     return (
       <div key={index}>
-        {clubProfiles.idClub ? (
-          <img src={'http://localhost:8080/api/'+ clubProfiles.idClub +'/image/upload'} ></img>
-        ) : null }
+        {/*clubProfiles.idClub ? (
+          <img src={'http://localhost:8080/api/'+ clubProfiles.idClub +'/image/download'} ></img>
+        ) : null*/ }
         <h1>{clubProfiles.nomClub}</h1>
         <ul>
           <li>id : {clubProfiles.idClub}</li>

@@ -2,12 +2,14 @@ package com.example.demo.controllers;
 
 import com.example.demo.entities.Affiliation;
 import com.example.demo.entities.Club;
+import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.services.AffiliationService;
 import com.example.demo.services.ClubService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,17 +32,24 @@ public class ClubController {
         return clubService.getClubs();
     }
 
-    @RequestMapping(path = "/createClub")
-    @PostMapping
-    public Club createClub() {return clubService.createClub(null);}
+    @PostMapping("/createClub")
+    public Club createClub() {
+        Club test = new Club("1", "UIR17", "INFORMER",
+                null, true, "UIR", "UIRimage", null); //for testing
+        return clubService.createClub(test);
+    }
 
-    @RequestMapping(path = "/findClubId/{id}")
-    @GetMapping
-    public Club findClubById(@PathVariable("id") String id) {return clubService.getClubById(id);}
 
-    @RequestMapping(path = "/findClubName/{name}")
-    @GetMapping
-    public Club findClubByName(@PathVariable("name") String name) {return clubService.getClubBynomClub(name);}
+    @GetMapping("/findClub/{id}")
+    public ResponseEntity<Club> findClubById(@PathVariable("id") String idClub) {
+        return clubService.getClubById(idClub);
+    }
+
+
+    @GetMapping("/findClub/{name}")
+    public ResponseEntity<Club> findClubBynomClub(@RequestParam String nomClub) {
+        return clubService.getClubBynomClub(nomClub);
+    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //DO NOT ENABLE              DO NOT ENABLE            DO NOT ENABLE                    DO NOT ENABLE          DO NOT ENABLE

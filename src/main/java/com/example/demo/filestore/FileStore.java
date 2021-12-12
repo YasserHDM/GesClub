@@ -25,7 +25,9 @@ public class FileStore {
 
     public byte[] download(String path, String key) {
         try {
+            System.out.println("The path of the file in aws is : " + path);
             S3Object object = s3.getObject(path, key);
+
             return IOUtils.toByteArray(object.getObjectContent());
         } catch (AmazonServiceException | IOException e) {
             throw new IllegalStateException("Failed to download file from s3", e);

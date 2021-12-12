@@ -20,7 +20,7 @@ public class AmazonConfig {
         );
 
         return AmazonS3Client.builder()
-                .withRegion("eu-west-2")
+                .withRegion("eu-west-3")
                 .withCredentials(new AWSStaticCredentialsProvider(awsCredentials))
                 .build();
 
