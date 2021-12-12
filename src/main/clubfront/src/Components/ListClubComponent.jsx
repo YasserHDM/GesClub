@@ -8,13 +8,13 @@ export default class ListClubComponent extends Component {
         super(props)
         
         this.state = {
-            Club: []
+            club: []
         }
     }
 
     componentDidMount() { // method get called after the component is mounted
         ClubService.getClubs().then((res) => {
-            this.setState({Club: res.data});
+            this.setState({club: res.data});
         });
 
 
@@ -39,14 +39,14 @@ export default class ListClubComponent extends Component {
 
                         <tbody>
                             {
-                                this.state.Club.map(
+                                this.state.club.map(
                                     Club =>
                                     <tr key= {Club.idClub}>
                                         <td>{Club.nomClub}</td>
                                         <td>{Club.descClub}</td>
                                         <td>{Club.dateCre}</td>
                                         <td>{Club.status}</td>
-                                        <td>{Club.logoLink}</td>
+                                        <td>{Club.logoClub}</td>
                                         <td>{Club.coverImgLink}</td>
                                     </tr>    
                                 )

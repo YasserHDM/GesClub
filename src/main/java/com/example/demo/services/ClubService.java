@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -57,6 +58,7 @@ public class ClubService {
             System.out.println("Nom du ficher est : " + fileName);
             fileStore.save(path, fileName, Optional.of(metadata), file.getInputStream());
             club.setLogo(fileName);
+            updateClub(idClub, club);
 
         } catch(IOException e) {
             throw new IllegalStateException(e);
@@ -100,6 +102,39 @@ public class ClubService {
         return ResponseEntity.ok().body(club);
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Club> updateClub(@PathVariable("id") String idClub,
+                                           @Validated @RequestBody Club c) {
 
+        Club club = clubRepository.findById(idClub)
+                .orElseThrow( () -> new ResourceNotFoundException("Club with id " + idClub + " not found"));
 
+        club.setLogo(c.getLogo().get());
+        club.setNomClub(c.getNomClub());
+        club.setDescClub(c.getDescClub());
+        club.setAffiliation(c.getAffiliation());
+        club.setActivites(c.getActivites());
+        club.setDateCre(c.getDateCre());
+        club.setCategorie(c.getCategorie());
+        club.setCoverImg(c.getCoverImg());
+        club.setMembres(c.getMembres());
+        club.setPostes(c.getPostes());
+        club.setReferent(c.getReferent());
+        club.setTresorerie(c.getTresorerie());
+        club.setStatus(c.isStatus());
+        club.setReunions(c.getReunions());
+
+        return ResponseEntity.ok().body(clubRepository.save(club));
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public Map<String, Boolean> deleteClub(String idClub) {
+        Club club = clubRepository.findById(idClub)
+                .orElseThrow( () -> new ResourceNotFoundException("Club with id " + idClub + " not found"));
+        clubRepository.delete(club);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", Boolean.TRUE);
+
+        return response;
+    }
 }

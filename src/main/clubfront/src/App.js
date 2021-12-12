@@ -2,97 +2,24 @@ import React, {useState, useEffect, useCallback} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
-import {useDropzone} from 'react-dropzone'
+
 import ListClubComponent from './Components/ListClubComponent'
+import HeaderComponent from './Components/HeaderComponent';
+import FooterComponent from './Components/FooterComponent';
 
-const ClubProfiles = () => {
-  const [ClubProfiles, setClubProfiles] = useState([]);
 
-  const fetchClubProfiles = () => {
-    axios.get("http://localhost:8080/api/club").then(res => {
-      console.log(res);
-      setClubProfiles(res.data);
-    });
-  }
-
-  useEffect( () => {
-    fetchClubProfiles();
-  }, []);
-
-  return ClubProfiles.map((clubProfiles, index) => {
-
-    return (
-      <div key={index}>
-        {/*clubProfiles.idClub ? (
-          <img src={'http://localhost:8080/api/'+ clubProfiles.idClub +'/image/download'} ></img>
-        ) : null*/ }
-        <h1>{clubProfiles.nomClub}</h1>
-        <ul>
-          <li>id : {clubProfiles.idClub}</li>
-          <li>descrption : {clubProfiles.descClub}</li>
-          <li>date de creation : {clubProfiles.dateCre}</li>
-          <li><Dropzone idClub = {clubProfiles.idClub} /></li>
-        </ul>
-        <br></br>
-        <br></br>
-        <br></br>
-      </div>
-    )
-  })
-};
-
-function Dropzone({ idClub }) {
-  const onDrop = useCallback(acceptedFiles => {
-    const file = acceptedFiles[0];
-    console.log(file);
-
-    const formData = new FormData();
-    formData.append("file", file);
-    
-    axios.post(
-      'http://localhost:8080/api/'+ idClub +'/image/upload', 
-      formData,
-      {
-        headers: {
-          "Content-Type" : "multipart/form-data"
-        }
-      }
-    )
-    .then(() => {
-      console.log("file  uploaded successfully");
-    })
-    .catch(err => {
-      console.log(err);
-    });
-    
-  }, [])
-  const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
-
-  return (
-    <div {...getRootProps()}>
-      <input {...getInputProps()} />
-      {
-        isDragActive ?
-          <p>Drop the files here ...</p> :
-          <p>Drag 'n' drop some files here, or click to select files</p>
-      }
-    </div>
-  )
-}
 
 function App() {
   return (
     <div className="App">
+      <HeaderComponent/>
       <div>
-        <ClubProfiles />
+        <a href="Club.js">Admin Club Page</a>
+        <div>
+          <ListClubComponent/>
+        </div>
       </div>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <div>
-        <ListClubComponent/>
-      </div>
+      <FooterComponent/>
     </div>
     
   );

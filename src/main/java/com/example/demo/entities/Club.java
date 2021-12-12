@@ -97,6 +97,7 @@ public class Club {
         this.logo = logo;
     }
 
+
     public void setCoverImg(String coverImg) {
         this.coverImg = coverImg;
     }

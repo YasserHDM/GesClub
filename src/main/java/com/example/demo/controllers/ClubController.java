@@ -10,11 +10,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -33,10 +35,10 @@ public class ClubController {
     }
 
     @PostMapping("/createClub")
-    public Club createClub() {
+    public Club createClub(@RequestBody Club club) {
         Club test = new Club("1", "UIR17", "INFORMER",
                 null, true, "UIR", "UIRimage", null); //for testing
-        return clubService.createClub(test);
+        return clubService.createClub(test); //clubService.createClub(club)
     }
 
 
@@ -49,6 +51,18 @@ public class ClubController {
     @GetMapping("/findClub/{name}")
     public ResponseEntity<Club> findClubBynomClub(@RequestParam String nomClub) {
         return clubService.getClubBynomClub(nomClub);
+    }
+
+    @PutMapping("/updateClub/{id}")
+    public ResponseEntity<Club> updateClub(@PathVariable("id") String idClub,
+                                           @Validated @RequestBody Club c)
+            throws ResourceNotFoundException {
+        return clubService.updateClub(idClub, c);
+    }
+
+    @DeleteMapping("deleteClub/{id}")
+    public Map<String, Boolean> deleteClub(@PathVariable("id") String idClub) throws ResourceNotFoundException {
+        return clubService.deleteClub(idClub);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
