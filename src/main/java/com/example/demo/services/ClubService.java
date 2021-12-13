@@ -80,7 +80,7 @@ public class ClubService {
         return clubRepository.findAll();
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.GET)
     public Club createClub(@RequestBody Club club){
         return clubRepository.save(club);
     }

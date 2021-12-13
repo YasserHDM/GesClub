@@ -9,7 +9,7 @@ public class Membre {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private String idMembre;
-
+    private String nom;
     private boolean status;
     private Date dateCon;
     private String pdpMembre;

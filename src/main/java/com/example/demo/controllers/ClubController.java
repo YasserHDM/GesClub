@@ -34,8 +34,8 @@ public class ClubController {
         return clubService.getClubs();
     }
 
-    @PostMapping("/createClub")
-    public Club createClub(@RequestBody Club club) {
+    @GetMapping("/createClub")
+    public Club createClub() {
         Club test = new Club("1", "UIR17", "INFORMER",
                 null, true, "UIR", "UIRimage", null); //for testing
         return clubService.createClub(test); //clubService.createClub(club)
