@@ -10,16 +10,16 @@ export default class ListClubComponent extends Component {
         this.state = {
             club: []
         }
+
     }
 
     componentDidMount() { // method get called after the component is mounted
         ClubService.getClubs().then((res) => {
             this.setState({club: res.data});
         });
+    }
 
-
-    }  
-
+    
     render() {
         return (
             <div>

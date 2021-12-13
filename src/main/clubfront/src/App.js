@@ -3,12 +3,14 @@ import React, {useState, useEffect, useCallback} from 'react';
 import './App.css';
 
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import ListClubComponent from './Components/ListClubComponent'
+import ListClubComponent from './Components/ListClubComponent';
+import CreateClubComponent from './Components/CreateClubComponent';
+import UpdateClubComponent from './Components/UpdateClubComponent';
 import HeaderComponent from './Components/HeaderComponent';
 import FooterComponent from './Components/FooterComponent';
 import axios from 'axios';
 
-import {useDropzone} from 'react-dropzone'
+import {useDropzone} from 'react-dropzone';
 
 const ClubProfiles = () => {
     const [ClubProfiles, setClubProfiles] = useState([]);
@@ -88,15 +90,19 @@ const ClubProfiles = () => {
 function App() {
   return (
     <div className="App">
-      <HeaderComponent/>
-      <div>
-        <a href="Club.js">Admin Club Page</a>
+      <Router>
+        <HeaderComponent/>
         <div>
-          <ListClubComponent/>
-          <ClubProfiles />
+          <div>
+            <Switch>
+              <Route path = "/clubs" component={ListClubComponent}></Route>
+              <Route path = "/add-club" component={CreateClubComponent}></Route>
+              <Route path = "/update-club" component={UpdateClubComponent}></Route>
+            </Switch>
+          </div>
         </div>
-      </div>
-      <FooterComponent/>
+        <FooterComponent/>
+      </Router>
     </div>
     
   );

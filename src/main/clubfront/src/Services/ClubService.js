@@ -1,12 +1,15 @@
 import axios from 'axios';
 
 
-const API_URL = "http://localhost:8080/api/club"
 
 class ClubService {
 
     getClubs() {
-        return axios.get(API_URL);
+        return axios.get("http://localhost:8080/api/club");
+    }
+
+    createClub(club) {
+        return axios.post("http://localhost:8080/api/createClub", club);
     }
 
     
