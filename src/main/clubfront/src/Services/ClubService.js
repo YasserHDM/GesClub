@@ -5,11 +5,11 @@ import axios from 'axios';
 class ClubService {
 
     getClubs() {
-        return axios.get("http://localhost:8080/api/club");
+        return axios.get("/api/club");
     }
 
     createClub(club) {
-        return axios.post("http://localhost:8080/api/createClub", club);
+        return axios.post("/api/createClub", club);
     }
 
     

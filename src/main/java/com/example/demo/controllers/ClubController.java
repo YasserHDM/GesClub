@@ -21,7 +21,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping(path = "/api")
-@CrossOrigin // just for testing in localhost || need to change for API deployment
+@CrossOrigin("*")
 public class ClubController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ClubController.class);
@@ -34,7 +34,7 @@ public class ClubController {
         return clubService.getClubs();
     }
 
-    @GetMapping("/createClub")
+    @PostMapping("/createClub")
     public Club createClub() {
         Club test = new Club("1", "UIR17", "INFORMER",
                 null, true, "UIR", "UIRimage", null); //for testing

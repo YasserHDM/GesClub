@@ -98,6 +98,7 @@ function App() {
               <Route path = "/clubs" component={ListClubComponent}></Route>
               <Route path = "/add-club" component={CreateClubComponent}></Route>
               <Route path = "/update-club" component={UpdateClubComponent}></Route>
+              <Route path="/aa" component={ClubProfiles} />
             </Switch>
           </div>
         </div>
